@@ -48,7 +48,7 @@ install_alacritty() {
         mkdir -p ~/.config/alacritty
     fi
 
-    cp -i ./alacritty.toml ~/.config/alacritty/alacritty.toml
+    cp -v ./alacritty.toml ~/.config/alacritty/alacritty.toml
 }
 
 install_st() {
@@ -60,7 +60,7 @@ install_st() {
 
     sudo apt install -y libxft-dev
 
-    cp -i st_config.h $st_dir/config.h
+    cp -v st_config.h $st_dir/config.h
     cd $st_dir
     make
 
@@ -71,6 +71,17 @@ install_st() {
 
 shell_config() {
     cp shell.profile ~/.profile
+}
+
+install_hackfont() {
+    unzip hack-ttf.zip -d h
+    mv h/ttf/* ~/.local/share/fonts/
+    fc-cache -f -v > /dev/null
+    rm -rf h
+
+    if [ -n "$(fc-list | grep -i hack)" ]; then
+        echo "Hack font installed successfuly"
+    fi
 }
 
 # https://docs.docker.com/engine/install/linux-postinstall/
