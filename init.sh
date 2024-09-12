@@ -96,4 +96,14 @@ install_docker() {
     sudo systemctl enable containerd.service
 }
 
-# update
+update
+install_zsh
+install_git
+install_i3
+install_tmux
+install_zathura
+install_jq
+install_vim
+install_hackfont
+install_st
+shell_config

@@ -5,7 +5,6 @@ function addtopath {
     esac
 }
 
-
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -23,7 +22,6 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     addtopath $HOME/.local/bin
 fi
-. "$HOME/.cargo/env"
 
 EDITOR=vim
 VISUAL=vim
@@ -32,7 +30,6 @@ set -o vi
 
 # addtopath <++>
 
-alias battery="upower -i $(upower -e | grep BAT) | grep --color=never -E 'state|to\ full|to\ empty|percentage'"
 alias son="xrandr --output HDMI-1 --right-of eDP-1 --auto"
 alias soff="xrandr --output HDMI-1 --off"
 
