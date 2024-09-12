@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 
 
-st_dir=~/progs/st # simple terminal directory
+st_dir=$HOME/progs/st # simple terminal directory
 
 update() {
     sudo apt update
@@ -10,7 +10,7 @@ update() {
 install_zsh() {
     sudo apt install -y zsh
 
-    cp zsh.config ~/.zshrc
+    cp zsh.config $HOME/.zshrc
 }
 
 install_git() {
@@ -20,13 +20,13 @@ install_git() {
 install_i3() {
     sudo apt install -y i3-wm dmenu
 
-    cp i3.config ~/.config/i3/config
+    cp i3.config $HOME/.config/i3/config
 }
 
 install_tmux() {
     sudo apt install -y tmux
 
-    cp tmux.config ~/.tmux.conf
+    cp tmux.config $HOME/.tmux.conf
 }
 
 install_zathura() {
@@ -44,11 +44,11 @@ install_vim() {
 install_alacritty() {
     # TODO: install
 
-    if [ ! -d ~/.config/alacritty ]; then
-        mkdir -p ~/.config/alacritty
+    if [ ! -d $HOME/.config/alacritty ]; then
+        mkdir -p $HOME/.config/alacritty
     fi
 
-    cp -v ./alacritty.toml ~/.config/alacritty/alacritty.toml
+    cp -v ./alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 
 install_st() {
@@ -70,12 +70,12 @@ install_st() {
 }
 
 shell_config() {
-    cp shell.profile ~/.profile
+    cp shell.profile $HOME/.profile
 }
 
 install_hackfont() {
     unzip hack-ttf.zip -d h
-    mv h/ttf/* ~/.local/share/fonts/
+    mv h/ttf/* $HOME/.local/share/fonts/
     fc-cache -f -v > /dev/null
     rm -rf h
 
