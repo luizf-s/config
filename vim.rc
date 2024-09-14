@@ -1,0 +1,22 @@
+colorscheme catppuccin_mocha
+
+set mouse=a
+set backspace=indent,eol,start
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+set hidden
+
+set autoindent
+set ignorecase
+set timeoutlen=1000 ttimeoutlen=0
+
+set noundofile
+set noswapfile
+set nobackup
+
+set number
+
+set colorcolumn=80

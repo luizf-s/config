@@ -10,7 +10,7 @@ update() {
 install_zsh() {
     sudo apt install -y zsh
 
-    cp zsh.config $HOME/.zshrc
+    cp -v zsh.config $HOME/.zshrc
 }
 
 install_git() {
@@ -20,13 +20,13 @@ install_git() {
 install_i3() {
     sudo apt install -y i3-wm dmenu
 
-    cp i3.config $HOME/.config/i3/config
+    cp -v i3.config $HOME/.config/i3/config
 }
 
 install_tmux() {
     sudo apt install -y tmux
 
-    cp tmux.config $HOME/.tmux.conf
+    cp -v tmux.config $HOME/.tmux.conf
 }
 
 install_zathura() {
@@ -39,16 +39,14 @@ install_jq() {
 
 install_vim() {
     sudo apt install -y vim
-}
 
-install_alacritty() {
-    # TODO: install
-
-    if [ ! -d $HOME/.config/alacritty ]; then
-        mkdir -p $HOME/.config/alacritty
+    if [ ! -d $HOME/.vim/colors ]; then
+        echo "creating $HOME/.vim/colors directory"
+        mkdir -p $HOME/.vim/colors
     fi
 
-    cp -v ./alacritty.toml $HOME/.config/alacritty/alacritty.toml
+    cp -v catppuccin_mocha.vim $HOME/.vim/colors
+    cp -v vim.rc $HOME/.vimrc
 }
 
 install_st() {
@@ -70,12 +68,18 @@ install_st() {
 }
 
 shell_config() {
-    cp shell.profile $HOME/.profile
+    cp -v shell.profile $HOME/.profile
 }
 
 install_hackfont() {
     unzip hack-ttf.zip -d h
+
+    if [! -d $HOME/.local/share/fonts]; then
+        mkdir -p $HOME/.local/share/fonts
+    fi
+
     mv h/ttf/* $HOME/.local/share/fonts/
+
     fc-cache -f -v > /dev/null
     rm -rf h
 
