@@ -46,6 +46,9 @@ install_vim() {
     fi
 
     cp -v catppuccin_mocha.vim $HOME/.vim/colors
+    cp -v gruvbox.vim          $HOME/.vim/colors
+    cp -v simple-dark.vim      $HOME/.vim/colors
+
     cp -v vim.rc $HOME/.vimrc
 }
 
@@ -58,11 +61,11 @@ install_st() {
 
     sudo apt install -y libxft-dev
 
-    cp -v st_config.h $st_dir/config.h
+    cp -v st_config.h $st_dir/config.def.h
     cd $st_dir
-    make
-
-    sudo ln -s $st_dir/st /usr/bin/st
+    patch -p2 < st-scrollback-0.9.2.diff
+    patch -p2 < st-scrollback-mouse-0.9.2.diff
+    make && sudo make install
 
     cd -
 }

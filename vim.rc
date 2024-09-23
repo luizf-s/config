@@ -1,4 +1,4 @@
-colorscheme catppuccin_mocha
+set wildmenu
 
 set mouse=a
 set backspace=indent,eol,start
@@ -20,3 +20,11 @@ set nobackup
 set number
 
 set colorcolumn=80
+
+set t_Co=256
+set background=dark
+colorscheme simple-dark
+
+filetype on
+
+syntax on
