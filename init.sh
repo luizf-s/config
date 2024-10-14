@@ -103,6 +103,14 @@ install_docker() {
     sudo systemctl enable containerd.service
 }
 
+setup_cursor() {
+  gsettings set org.gnome.desktop.interface cursor-theme 'DMZ-Black'
+  if [[ -e "/usr/share/icons/default/index.theme" ]];
+    sudo mv /usr/shar/icons/default/index.theme /usr/shar/icons/default/index.theme.backup
+  fi
+  sudo ln -s /usr/share/icons/DMZ-Black/cursor.theme /usr/share/icons/default/index.theme
+}
+
 update
 install_zsh
 install_git
@@ -114,3 +122,4 @@ install_vim
 install_hackfont
 install_st
 shell_config
+setup_cursor
