@@ -13,9 +13,12 @@ set autoindent
 set ignorecase
 set timeoutlen=1000 ttimeoutlen=0
 
+set autoread
+
 set noundofile
 set noswapfile
 set nobackup
+set noconfirm
 
 set number
 
