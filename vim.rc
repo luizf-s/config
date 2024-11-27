@@ -24,10 +24,28 @@ set number
 
 set colorcolumn=80
 
+hi Normal ctermbg=none
 set t_Co=256
 set background=dark
-colorscheme simple-dark
+colorscheme simple-dark-transparent
 
 filetype on
 
 syntax on
+
+set path+=**
+
+set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:␣,eol:$
+set list
+
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+
+nnoremap j gj
+nnoremap k gk
+
+nnoremap <F9> :copen<CR>
+nnoremap <F10> :cp<CR>
+nnoremap <F11> :cn<CR>
