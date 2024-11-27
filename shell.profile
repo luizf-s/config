@@ -36,3 +36,30 @@ alias soff="xrandr --output HDMI-1 --off"
 alias ls="ls        --color --group-directories-first"
 alias ll="ls -lh -X --color --group-directories-first"
 alias la="ls -a     --color --group-directories-first"
+
+common() {
+  is_compton_running=$(pidof compton)
+
+  if [[ -z $is_compton_running  ]]; then
+    echo "starting compton"
+    compton &
+    disown %compton
+  fi
+
+  echo "setting bg"
+  feh --bg-fill ~/Pictures/bg.jpg
+}
+
+second_monitor() {
+  target=$(xrandr | grep -E '^HDMI.* connected' | sed -E 's/\s.*//g')
+  if [ "$1" = "on" ]; then
+    xrandr --output $target --auto --right-of eDP-1
+  fi
+
+  if [ "$1" = "off" ]; then
+    xrandr --output $target --off
+  fi
+
+  common
+}
+
