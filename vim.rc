@@ -29,6 +29,7 @@ set colorcolumn=80
 
 hi Normal ctermbg=none
 set t_Co=256
+set termguicolors
 set background=dark
 colorscheme simple-dark-transparent
 
@@ -68,3 +69,9 @@ nnoremap <F9>  :call ToggleQF()<CR>
 nnoremap <F10> :cp<CR>
 nnoremap <F11> :cn<CR>
 
+autocmd Filetype javascript setlocal ts=2 sw=2
+autocmd Filetype typescript setlocal ts=2 sw=2
+autocmd Filetype css        setlocal ts=2 sw=2
+autocmd Filetype scss       setlocal ts=2 sw=2
+autocmd Filetype html       setlocal ts=2 sw=2
+autocmd Filetype go         setlocal ts=4 sw=4 sts=4 noexpandtab
