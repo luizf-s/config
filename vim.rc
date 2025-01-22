@@ -5,60 +5,59 @@ set backspace=indent,eol,start
 
 set tabstop=2
 set shiftwidth=2
-  set expandtab
+set expandtab
 
-  set hidden
+set hidden
 
-  set autoindent
-  set ignorecase
-  set timeoutlen=1000 ttimeoutlen=0
+set autoindent
+set ignorecase
+set timeoutlen=1000 ttimeoutlen=0
 
-  set splitright
-  set splitbelow
+set splitright
+set splitbelow
 
-  set autoread
+set autoread
 
-  set noundofile
-  set noswapfile
-  set nobackup
-  set noconfirm
+set noundofile
+set noswapfile
+set nobackup
+set noconfirm
 
-  set number
+set number
 
-  set colorcolumn=80
+set colorcolumn=80
 
-  hi Normal ctermbg=none
-  set t_Co=256
-  set background=dark
-  colorscheme simple-dark-transparent
+hi Normal ctermbg=none
+set t_Co=256
+set background=dark
+colorscheme simple-dark-transparent
 
-  filetype on
+filetype on
 
-  syntax on
+syntax on
 
-  set path+=**
+set path+=**
 
-  set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:␣,eol:$
-  set list
+set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:␣,eol:$
+set list
 
-  nnoremap n nzz
-  nnoremap N Nzz
-  nnoremap * *zz
-  nnoremap # #zz
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
 
-  nnoremap j gj
-  nnoremap k gk
+nnoremap j gj
+nnoremap k gk
 
-  let g:slime_target = "tmux"
+let g:slime_target = "tmux"
 
-  function! ToggleQF()
-    echo "toggleqf"
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-      copen
-    else
-      cclose
-    endif
-  endfunction
+function! ToggleQF()
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    copen
+  else
+    cclose
+  endif
+endfunction
 
 nnoremap <F5> :Vex<CR>
 nnoremap <F6> :ls<CR>:b 
