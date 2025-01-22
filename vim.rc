@@ -5,47 +5,67 @@ set backspace=indent,eol,start
 
 set tabstop=2
 set shiftwidth=2
-set expandtab
+  set expandtab
 
-set hidden
+  set hidden
 
-set autoindent
-set ignorecase
-set timeoutlen=1000 ttimeoutlen=0
+  set autoindent
+  set ignorecase
+  set timeoutlen=1000 ttimeoutlen=0
 
-set autoread
+  set splitright
+  set splitbelow
 
-set noundofile
-set noswapfile
-set nobackup
-set noconfirm
+  set autoread
 
-set number
+  set noundofile
+  set noswapfile
+  set nobackup
+  set noconfirm
 
-set colorcolumn=80
+  set number
 
-hi Normal ctermbg=none
-set t_Co=256
-set background=dark
-colorscheme simple-dark-transparent
+  set colorcolumn=80
 
-filetype on
+  hi Normal ctermbg=none
+  set t_Co=256
+  set background=dark
+  colorscheme simple-dark-transparent
 
-syntax on
+  filetype on
 
-set path+=**
+  syntax on
 
-set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:␣,eol:$
-set list
+  set path+=**
 
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
+  set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:␣,eol:$
+  set list
 
-nnoremap j gj
-nnoremap k gk
+  nnoremap n nzz
+  nnoremap N Nzz
+  nnoremap * *zz
+  nnoremap # #zz
 
-nnoremap <F9> :copen<CR>
+  nnoremap j gj
+  nnoremap k gk
+
+  let g:slime_target = "tmux"
+
+  function! ToggleQF()
+    echo "toggleqf"
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+      copen
+    else
+      cclose
+    endif
+  endfunction
+
+nnoremap <F5> :Vex<CR>
+nnoremap <F6> :ls<CR>:b 
+nnoremap <F7> :%s//gc<left><left><left>
+nnoremap <F8> :grep! -Er 
+
+nnoremap <F9>  :call ToggleQF()<CR>
 nnoremap <F10> :cp<CR>
 nnoremap <F11> :cn<CR>
+
