@@ -3,10 +3,6 @@ set wildmenu
 set mouse=a
 set backspace=indent,eol,start
 
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
 set hidden
 
 set autoindent
@@ -30,8 +26,9 @@ set colorcolumn=80
 hi Normal ctermbg=none
 set t_Co=256
 set termguicolors
+" colorscheme simple-dark
 set background=dark
-colorscheme simple-dark-transparent
+colorscheme PaperColor
 
 filetype on
 
@@ -40,8 +37,10 @@ syntax on
 set path+=**
 
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:␣,eol:$
-set list
+set nolist
 
+set hlsearch
+set incsearch
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
@@ -60,7 +59,7 @@ function! ToggleQF()
   endif
 endfunction
 
-nnoremap <F5> :Vex<CR>
+nnoremap <F5> :Lex 10<CR>
 nnoremap <F6> :ls<CR>:b 
 nnoremap <F7> :%s//gc<left><left><left>
 nnoremap <F8> :grep! -Er 
@@ -69,9 +68,63 @@ nnoremap <F9>  :call ToggleQF()<CR>
 nnoremap <F10> :cp<CR>
 nnoremap <F11> :cn<CR>
 
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
 autocmd Filetype javascript setlocal ts=2 sw=2
 autocmd Filetype typescript setlocal ts=2 sw=2
 autocmd Filetype css        setlocal ts=2 sw=2
 autocmd Filetype scss       setlocal ts=2 sw=2
 autocmd Filetype html       setlocal ts=2 sw=2
 autocmd Filetype go         setlocal ts=4 sw=4 sts=4 noexpandtab
+
+function! ListColorschemes()
+    let colorschemes = []
+
+    for file in split(globpath(&rtp, 'colors/*.vim'), '\n')
+        let colorscheme = fnamemodify(file, ':t:r')
+        call add(colorschemes, colorscheme)
+    endfor
+
+    return colorschemes
+endfunction
+
+let g:curThemeIndex = 0
+let g:available_colorschemes = ListColorschemes()
+
+function! NextColorscheme()
+  let g:curThemeIndex = (g:curThemeIndex + 1) % len(g:available_colorschemes)
+  execute 'colorscheme' g:available_colorschemes[g:curThemeIndex]
+  echo g:colors_name
+endfunction
+
+function! PrevColorscheme()
+  let g:curThemeIndex = (g:curThemeIndex - 1 + len(g:available_colorschemes)) % len(g:available_colorschemes)
+  execute 'colorscheme' g:available_colorschemes[g:curThemeIndex]
+  echo g:colors_name
+endfunction
+
+nnoremap g> :call NextColorscheme()<CR>
+nnoremap g< :call PrevColorscheme()<CR>
+
+" autoclose brackets
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O<Tab>
+inoremap {{     {
+inoremap {}     {}
+
+" autoclose parenthesis
+inoremap        (  ()<Left>
+inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+
+" autoclose quotes
+inoremap <expr> '       strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+inoremap <expr> "       strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
+inoremap        <C-g>"  "
+inoremap        <C-g>'  '
+ 
+" autoclose multiline comments
+inoremap <C-g>/*          /**/<Left><Left>
+inoremap <C-g>/*<Space>   /*<Space><Space>*/<Left><Left><Left>
+inoremap <C-g>/*<CR>      /*<CR>*/<Esc>O
